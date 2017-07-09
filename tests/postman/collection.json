@@ -1,0 +1,360 @@
+{
+	"variables": [],
+	"info": {
+		"name": "git-api",
+		"_postman_id": "c79e1c6f-d9a9-6a57-5675-2dc2e37a143c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/repositories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "List repositories"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Response repo\"] = jsonData.name === postman.getEnvironmentVariable('repo');"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get repository"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/history",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response contains commits\"] = responseBody.has('commits');",
+							"tests[\"Response contains count\"] = responseBody.has('count');",
+							"tests[\"Response contains limit\"] = responseBody.has('limit');",
+							"tests[\"Response contains offset\"] = responseBody.has('offset');"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/history",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get repository history"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/history?limit=5&offset=10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response contains commits\"] = responseBody.has('commits');",
+							"tests[\"Response contains count\"] = responseBody.has('count');",
+							"tests[\"Response contains limit\"] = responseBody.has('limit');",
+							"tests[\"Response contains offset\"] = responseBody.has('offset');"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{url}}/repositories/{{repo}}/history?limit=5&offset=10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"repositories",
+						"{{repo}}",
+						"history"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "offset",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get repository history with pagination"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/commits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/commits",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "List repository commits"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/commits/{sha}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response contains sha\"] = responseBody.has('sha');",
+							"tests[\"Response contains author\"] = responseBody.has('author');",
+							"tests[\"Response contains committer\"] = responseBody.has('committer');",
+							"tests[\"Response contains message\"] = responseBody.has('message');",
+							"tests[\"Response contains tree\"] = responseBody.has('tree');"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/commits/{{commit}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get commit"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/tags",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/tags",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "List repository tags"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/tags/{tag}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response contains tag\"] = responseBody.has('tag');",
+							"tests[\"Response contains sha\"] = responseBody.has('sha');",
+							"tests[\"Response contains message\"] = responseBody.has('message');",
+							"tests[\"Response contains tagger\"] = responseBody.has('tagger');",
+							"tests[\"Response contains object\"] = responseBody.has('object');"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/tags/{{tag}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get tag"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/trees/{revision}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/trees/{{revision}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get a tree"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/trees/{revision}?recursive=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{url}}/repositories/{{repo}}/trees/{{revision}}?recursive=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"repositories",
+						"{{repo}}",
+						"trees",
+						"{{revision}}"
+					],
+					"query": [
+						{
+							"key": "recursive",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get a tree recursively"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/files/{sha}/history",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response contains commits\"] = responseBody.has('commits');",
+							"tests[\"Response contains count\"] = responseBody.has('count');",
+							"tests[\"Response contains limit\"] = responseBody.has('limit');",
+							"tests[\"Response contains offset\"] = responseBody.has('offset');",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/files/{{file}}/history",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get file history"
+			},
+			"response": []
+		},
+		{
+			"name": "/repositories/{name}/files/{sha}/contents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response contains name\"] = responseBody.has('name');",
+							"tests[\"Response contains path\"] = responseBody.has('path');",
+							"tests[\"Response contains size\"] = responseBody.has('size');",
+							"tests[\"Response contains content\"] = responseBody.has('content');",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/repositories/{{repo}}/files/{{file}}/contents",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get file contents"
+			},
+			"response": []
+		}
+	]
+}

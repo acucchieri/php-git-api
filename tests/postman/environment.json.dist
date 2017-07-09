@@ -1,0 +1,46 @@
+{
+  "id": "06887f1b-5c3d-ad5b-79a3-30bfc3244f2d",
+  "name": "git-api.env",
+  "values": [
+    {
+      "enabled": true,
+      "key": "url",
+      "value": "localhost",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "repo",
+      "value": "my/repo.git",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "commit",
+      "value": "d9ad9c5ba45cf4b5e21137700b59ad48b4f7085e",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "tag",
+      "value": "v1.0.0",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "file",
+      "value": "b2c33800576318e658c33fb5e6a456f4af902737",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "revision",
+      "value": "master",
+      "type": "text"
+    }
+  ],
+  "timestamp": 1499638158223,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2017-07-09T22:09:22.017Z",
+  "_postman_exported_using": "Postman/5.0.2"
+}
