@@ -1,0 +1,7 @@
+/.php_cs.cache
+/.env
+/var/*
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+/vendor/
